@@ -34,6 +34,13 @@ echo '<div ';
 
 			<?php dynamic_sidebar( $sidebar ); ?>
 
+			<?php wp_list_categories([
+				'taxonomy' => 'ad_category',
+				'hide_empty' => false,
+				'hierarchical' => true,
+				'title_li' => 'Kategorije'
+			]) ?>
+
 		<?php endif; ?>
 
 		<?php astra_sidebars_after(); ?>
