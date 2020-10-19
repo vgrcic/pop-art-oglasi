@@ -158,6 +158,12 @@ require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-filters.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-hooks.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';
 
+function blockusers_init() {
+	if (is_admin() && !current_user_can('administrator') && !(defined('DOING_AJAX') && DOING_AJAX)) {
+		wp_redirect(home_url()); exit;
+	}
+}
+
 function register_ad_post_type () {
 	register_post_type('ad', [
 		'labels' => [
@@ -181,5 +187,13 @@ function register_ad_category_taxonomy () {
 	]);
 }
 
+function remove_admin_bar() {
+	if (!current_user_can('administrator') && !is_admin()) {
+		show_admin_bar(false);
+	}
+}
+
 add_action('init', 'register_ad_post_type');
 add_action('init', 'register_ad_category_taxonomy');
+add_action('init', 'blockusers_init');
+add_action('after_setup_theme', 'remove_admin_bar');
