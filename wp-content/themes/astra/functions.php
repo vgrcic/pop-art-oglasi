@@ -193,9 +193,21 @@ function remove_admin_bar() {
 	}
 }
 
-function price($number, $currency = 'RSD')
-{
+function price($number, $currency = 'RSD') {
 	return number_format($number, 2, ',', '.') . ' ' . $currency;
+}
+
+function delete_author_post($post_id) {
+	$post = get_post($post_id);
+
+	if (!empty($post) && user_owns_post($post)) {
+		wp_delete_post($post_id);
+		return true;
+	} return false;
+}
+
+function user_owns_post($post) {
+	return $post->post_author == get_current_user_id();
 }
 
 add_action('init', 'register_ad_post_type');

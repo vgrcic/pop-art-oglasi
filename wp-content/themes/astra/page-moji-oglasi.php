@@ -12,6 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+if (!empty($_GET['delete']) && delete_author_post($_GET['delete'])) {
+	wp_redirect(site_url('/moji-oglasi?delete_success=1'));
+}
+
 get_header(); ?>
 
 <?php if ( astra_page_layout() == 'left-sidebar' ) : ?>
