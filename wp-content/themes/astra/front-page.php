@@ -44,11 +44,13 @@ get_header(); ?>
 
 			<?php while ($newest->have_posts()) : $newest->the_post() ?>
 
-				<a href="<?php the_permalink() ?>"><h2><?php the_title() ?></h2></a>
-
-				<?php the_post_thumbnail('slika') ?>
-
-				<?php the_excerpt() ?>
+				<a href="<?php the_permalink() ?>">
+					<div>
+						<h2><?php the_title() ?></h2>
+						<img width="200px" src="<?php the_field('slika') ?>">
+						<?php the_excerpt() ?>
+					</div>
+				</a>
 
 			<?php endwhile; ?>
 

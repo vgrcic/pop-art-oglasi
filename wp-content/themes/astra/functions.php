@@ -193,6 +193,11 @@ function remove_admin_bar() {
 	}
 }
 
+function price($number, $currency = 'RSD')
+{
+	return number_format($number, 2, ',', '.') . ' ' . $currency;
+}
+
 add_action('init', 'register_ad_post_type');
 add_action('init', 'register_ad_category_taxonomy');
 add_action('init', 'blockusers_init');
