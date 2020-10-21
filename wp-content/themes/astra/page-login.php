@@ -22,7 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		'user_login' => $_POST['username'],
 		'user_password' => $_POST['password'],
 	]);
+
+	wp_redirect(site_url('/'));
 }
+
 
 get_header(); ?>
 

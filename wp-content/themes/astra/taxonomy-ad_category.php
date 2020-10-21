@@ -26,17 +26,19 @@ get_header(); ?>
 					[
 						'taxonomy' => 'ad_category',
 						'field'    => 'slug',
-						'terms'    => $page->slug
+						'terms'    => $page->slug,
 					]
 				]
 			]);
+
+			echo $GLOBALS['query']->request;
 
 		?>
 
 		<?php if ($query->have_posts()) : ?>
 			<?php while ($query->have_posts()) : $query->the_post() ?>
-				<?php echo the_title(); ?>
-			<?php endwhile;  wp_reset_postdata(); ?>
+				<?php the_title() ?>
+			<?php endwhile; wp_reset_postdata(); ?>
 		<?php endif; ?>
 
 		<?php astra_primary_content_bottom(); ?>
