@@ -42,9 +42,9 @@ get_header(); ?>
 					<?php echo get_the_date('d.m.Y. - H:i') ?>
 					<br>
 
-					<?php if (!empty($cena = get_field('stanje'))) { ?>
+					<?php if (!empty($stanje = get_field('stanje'))) { ?>
 						Stanje robe:
-						<b><?= ($cena === 'used') ? 'Polovno' : 'Novo' ?></b>
+						<b><?= ($stanje === 'used') ? 'Polovno' : 'Novo' ?></b>
 						<br>
 					<?php } ?>
 
