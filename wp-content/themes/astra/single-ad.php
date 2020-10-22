@@ -16,7 +16,8 @@ get_header(); ?>
 
 <?php
 
-	$categories = get_terms('ad_category');
+	$categories = get_the_terms($post, 'ad_category');
+
 	if ( !empty($categories) ) {
 		$category = $categories[0];
 	}
