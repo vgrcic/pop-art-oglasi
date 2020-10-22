@@ -31,13 +31,19 @@ get_header(); ?>
 				]
 			]);
 
-			echo $GLOBALS['query']->request;
-
 		?>
 
 		<?php if ($query->have_posts()) : ?>
 			<?php while ($query->have_posts()) : $query->the_post() ?>
-				<?php the_title() ?>
+
+				<a href="<?php the_permalink() ?>">
+					<div>
+						<h2><?php the_title() ?></h2>
+						<img width="200px" src="<?php the_field('slika') ?>">
+						<?php the_excerpt() ?>
+					</div>
+				</a>
+
 			<?php endwhile; wp_reset_postdata(); ?>
 		<?php endif; ?>
 
