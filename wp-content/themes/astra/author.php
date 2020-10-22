@@ -41,6 +41,7 @@ get_header(); ?>
 					'post_type' => 'ad',
 				]); ?>
 
+
 				<?php while ($query->have_posts()) : $query->the_post() ?>
 					<article  class="post-1 post type-post status-publish format-standard hentry category-uncategorized ast-col-sm-12 ast-article-post" id="post-1" itemtype="https://schema.org/CreativeWork" itemscope="itemscope">
 						<div class="ast-post-format- ast-no-thumb blog-layout-1">
@@ -50,11 +51,13 @@ get_header(); ?>
 									<h2 class="entry-title" itemprop="headline">
 										<a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title() ?></a>
 									</h2>
-									<div class="entry-meta">
-										<span class="cat-links">
-											<a href="http://localhost/wordpress/category/uncategorized/" rel="category tag">Uncategorized</a>
-										</span>
-									</div>
+									<?php if ( !empty($category = get_first_term($post, 'ad_category')) ) { ?>
+										<div class="entry-meta">
+											<span class="cat-links">
+												<a href="<?= get_term_link($category) ?>" rel="category tag"><?= $category->name ?></a>
+											</span>
+										</div>
+									<?php } ?>
 								</header>
 								<div class="entry-content clear" itemprop="text">
 									<?php the_excerpt() ?>

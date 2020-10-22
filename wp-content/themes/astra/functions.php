@@ -210,6 +210,14 @@ function user_owns_post($post) {
 	return $post->post_author == get_current_user_id();
 }
 
+function get_first_term($post, $taxonomy) {
+	$terms = get_the_terms($post, $taxonomy);
+
+	if ( !empty($terms) ) {
+		return $terms[0];
+	} return null;
+}
+
 add_action('init', 'register_ad_post_type');
 add_action('init', 'register_ad_category_taxonomy');
 add_action('init', 'blockusers_init');

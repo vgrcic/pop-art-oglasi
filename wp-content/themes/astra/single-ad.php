@@ -14,16 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header(); ?>
 
-<?php
-
-	$categories = get_the_terms($post, 'ad_category');
-
-	if ( !empty($categories) ) {
-		$category = $categories[0];
-	}
-
-?>
-
 <?php if ( astra_page_layout() == 'left-sidebar' ) : ?>
 
 	<?php get_sidebar(); ?>
@@ -72,7 +62,7 @@ get_header(); ?>
 						<br>
 					<?php } ?>
 
-					<?php if ( !empty($category) ) { ?>
+					<?php if ( !empty($category = get_first_term($post, 'ad_category')) ) { ?>
 						Kategorija: <a href="<?= get_term_link($category) ?>"><b><?= $category->name ?></b></a>
 						<br>
 					<?php } ?>
