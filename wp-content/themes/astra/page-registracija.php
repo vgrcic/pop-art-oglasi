@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+check_guest();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	wp_insert_user([
 		'user_pass' => $_POST['password'],

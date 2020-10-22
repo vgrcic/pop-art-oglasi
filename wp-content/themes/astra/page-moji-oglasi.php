@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+check_auth();
+
 if (!empty($_GET['delete']) && delete_author_post($_GET['delete'])) {
 	wp_redirect(site_url('/moji-oglasi?delete_success=1'));
 }
@@ -31,7 +33,7 @@ get_header(); ?>
 		<section class="ast-author-box ast-archive-description">
 			<div class="ast-author-bio">
 				<h1 class='page-title ast-archive-title'>
-					<?php the_title() ?>
+					<?php the_title() ?> <a href="#" class="ast-button">Kreiraj oglas</a>
 				</h1>
 			</div>
 		</section>

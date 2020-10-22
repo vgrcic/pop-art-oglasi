@@ -218,6 +218,18 @@ function get_first_term($post, $taxonomy) {
 	} return null;
 }
 
+function check_auth() {
+	if ( ! is_user_logged_in()) {
+		wp_redirect(site_url('/prijava'));
+	}
+}
+
+function check_guest() {
+	if (is_user_logged_in()) {
+		wp_redirect(site_url('/'));
+	}
+}
+
 add_action('init', 'register_ad_post_type');
 add_action('init', 'register_ad_category_taxonomy');
 add_action('init', 'blockusers_init');
