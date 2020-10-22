@@ -14,12 +14,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 check_auth();
 
+require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+
 if (valid_create_ad_request()) {
 	$post_id = create_ad([
 		'title'       => $_POST['title'],
 		'description' => $_POST['description'],
 		'category'    => $_POST['category'],
 	]);
+
+	add_image_to_ad('slika', $post_id);
 
 	/*
 	slika

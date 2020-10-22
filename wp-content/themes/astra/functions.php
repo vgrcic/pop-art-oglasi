@@ -252,6 +252,15 @@ function create_ad($data) {
 	]);
 }
 
+function add_image_to_ad($name, $post_id) {
+	$attach_id = media_handle_upload($name, $post_id);
+
+	if ( $attach_id > 0 ) {
+		update_post_meta($post_id, $name, $attach_id);
+		return true;
+	} return false;
+}
+
 add_action('init', 'register_ad_post_type');
 add_action('init', 'register_ad_category_taxonomy');
 add_action('init', 'blockusers_init');
