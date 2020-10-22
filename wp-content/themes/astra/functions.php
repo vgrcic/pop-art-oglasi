@@ -230,6 +230,28 @@ function check_guest() {
 	}
 }
 
+function old($field) {
+	if ( ! empty($_POST[$field]) ) {
+		return $_POST[$field];
+	} return null;
+}
+
+function valid_create_ad_request() {
+	return $_SERVER['REQUEST_METHOD'] === 'POST' &&
+		!empty(trim($_POST['title'])) && !empty(trim($_POST['description'])) &&
+		!empty($_POST['category']);
+}
+
+function create_ad($data) {
+	return wp_insert_post([
+		'post_type'    => 'ad',
+		'post_status'  => 'publish',
+		'post_title'   => $data['title'],
+		'post_content' => $data['description'],
+		'tax_input'    => ['ad_category' => [$data['category']]],
+	]);
+}
+
 add_action('init', 'register_ad_post_type');
 add_action('init', 'register_ad_category_taxonomy');
 add_action('init', 'blockusers_init');
