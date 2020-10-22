@@ -237,9 +237,13 @@ function old($field) {
 }
 
 function valid_create_ad_request() {
-	return $_SERVER['REQUEST_METHOD'] === 'POST' &&
-		!empty(trim($_POST['title'])) && !empty(trim($_POST['description'])) &&
-		!empty($_POST['category']);
+	return $_SERVER['REQUEST_METHOD'] === 'POST'
+		&& !empty(trim($_POST['title']))
+		&& !empty(trim($_POST['description']))
+		&& !empty($_POST['category'])
+		&& !empty($_POST['price']) && is_numeric($_POST['price']) && $_POST['price'] > 0
+		&& !empty($_POST['condition']) && in_array($_POST['condition'], ['new', 'used'])
+		;
 }
 
 function create_ad($data) {
@@ -259,6 +263,22 @@ function add_image_to_ad($name, $post_id) {
 		update_post_meta($post_id, $name, $attach_id);
 		return true;
 	} return false;
+}
+
+function add_metas_to_ad($post_id, $metas) {
+	foreach ($metas as $key => $value) {
+		add_meta_to_ad($post_id, $key, $value);
+	}
+}
+
+function add_meta_to_ad($post_id, $meta, $value) {
+	if (empty($value)) {
+        delete_post_meta($post_id, $meta);
+    } else if ( ! get_post_meta($post_id, $meta)) {
+        add_post_meta($post_id, $meta, $value);
+    } else {
+        update_post_meta($post_id, $meta, $value);
+    }
 }
 
 add_action('init', 'register_ad_post_type');

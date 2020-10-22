@@ -27,15 +27,12 @@ if (valid_create_ad_request()) {
 
 	add_image_to_ad('slika', $post_id);
 
-	/*
-	slika
-	cena
-	kategorija
-	stanje
-	telefon
-	lokacija
-	*/
-
+	add_metas_to_ad($post_id, [
+		'cena' => $_POST['price'],
+		'stanje' => $_POST['condition'],
+		'telefon' => $_POST['telefon'] ?? null,
+		'lokacija' => $_POST['lokacija'] ?? null,
+	]);
 }
 
 $categories = get_terms([
