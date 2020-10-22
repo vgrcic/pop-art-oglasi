@@ -14,6 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header(); ?>
 
+<?php
+
+	$categories = get_terms('ad_category');
+	if ( !empty($categories) ) {
+		$category = $categories[0];
+	}
+
+?>
+
 <?php if ( astra_page_layout() == 'left-sidebar' ) : ?>
 
 	<?php get_sidebar(); ?>
@@ -59,6 +68,11 @@ get_header(); ?>
 
 					<?php if (!empty($lokacija = get_field('lokacija'))) { ?>
 						Lokacija: <b><?= $lokacija ?></b>
+						<br>
+					<?php } ?>
+
+					<?php if ( !empty($category) ) { ?>
+						Kategorija: <a href="<?= get_term_link($category) ?>"><b><?= $category->name ?></b></a>
 						<br>
 					<?php } ?>
 
