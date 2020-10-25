@@ -281,6 +281,14 @@ function add_meta_to_ad($post_id, $meta, $value) {
     }
 }
 
+function pretty_date_diff($date) {
+	$days = date_diff(date_create($date), new DateTime)->days;
+
+	if ($days === 0) {
+		return 'danas';
+	} return 'pre '.$days.' dan(a)';
+}
+
 add_action('init', 'register_ad_post_type');
 add_action('init', 'register_ad_category_taxonomy');
 add_action('init', 'blockusers_init');

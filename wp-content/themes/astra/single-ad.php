@@ -38,8 +38,8 @@ get_header(); ?>
 					</a>
 					<br>
 
-					Vreme postavljanja oglasa:
-					<?php echo get_the_date('d.m.Y. - H:i') ?>
+					Oglas postavljen:
+					<?= pretty_date_diff(get_the_date('Y-m-d')) ?>
 					<br>
 
 					<?php if (!empty($stanje = get_field('stanje'))) { ?>
