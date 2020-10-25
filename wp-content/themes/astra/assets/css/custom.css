@@ -1,0 +1,15 @@
+td input {
+	width: 100%;
+}
+
+div.success {
+	padding: 10px;
+	background-color: #9fdf9f;
+	font-weight: bold;
+}
+
+div.error {
+	padding: 10px;
+	background-color: #ff8080;
+	font-weight: bold;
+}

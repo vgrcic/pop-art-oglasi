@@ -193,6 +193,11 @@ function remove_admin_bar() {
 	}
 }
 
+function theme_styles()  
+{ 
+	wp_enqueue_style('custom', get_template_directory_uri() . '/assets/css/custom.css');
+}
+
 function price($number, $currency = 'RSD') {
 	return number_format($number, 2, ',', '.') . ' ' . $currency;
 }
@@ -325,11 +330,11 @@ function pretty_date_diff($date) {
 }
 
 function success($message) {
-	echo '<div style="padding: 10px; background-color: #9fdf9f; font-weight: bold">'.$message.'</div>';
+	echo '<div class="success">'.$message.'</div>';
 }
 
 function error($message) {
-	echo '<div style="padding: 10px; background-color: #ff8080; font-weight: bold">'.$message.'</div>';
+	echo '<div class="error">'.$message.'</div>';
 }
 
 function valid_registration_request() {
@@ -346,3 +351,4 @@ add_action('init', 'register_ad_post_type');
 add_action('init', 'register_ad_category_taxonomy');
 add_action('init', 'blockusers_init');
 add_action('after_setup_theme', 'remove_admin_bar');
+add_action('wp_enqueue_scripts', 'theme_styles');
