@@ -243,7 +243,12 @@ function valid_create_ad_request() {
 		&& !empty($_POST['category'])
 		&& !empty($_POST['price']) && is_numeric($_POST['price']) && $_POST['price'] > 0
 		&& !empty($_POST['condition']) && in_array($_POST['condition'], ['new', 'used'])
-		;
+		&& (empty($_FILES['slika']) || is_valid_image($_FILES['slika']));
+}
+
+function is_valid_image($file) {
+	$mime = mime_content_type($file['tmp_name']);
+	return strpos($mime, 'image/') !== false;
 }
 
 function create_ad($data) {
@@ -282,7 +287,8 @@ function add_meta_to_ad($post_id, $meta, $value) {
 }
 
 function pretty_date_diff($date) {
-	$days = date_diff(date_create($date), new DateTime)->days;
+	$interval = date_diff(date_create($date), new DateTime);
+	$days = $interval->days;
 
 	if ($days === 0) {
 		return 'danas';

@@ -33,7 +33,7 @@ get_header(); ?>
 		<section class="ast-author-box ast-archive-description">
 			<div class="ast-author-bio">
 				<h1 class='page-title ast-archive-title'>
-					<?php the_title() ?> <a href="<?php site_url('/kreiraj-oglas') ?>" class="ast-button">Kreiraj oglas</a>
+					<?php the_title() ?> <a href="<?= site_url('/kreiraj-oglas') ?>" class="ast-button">Kreiraj oglas</a>
 				</h1>
 			</div>
 		</section>
