@@ -37,11 +37,20 @@ get_header(); ?>
 				</h1>
 			</div>
 		</section>
+
+		<?php if ($_GET['delete_success']) { ?>
+			<div style="padding: 10px; background-color: #9fdf9f; font-weight: bold">Uspešno ste obrisali oglas.</div>
+		<?php } ?>
+
+		<?php if ($_GET['ad_created']) { ?>
+			<div style="padding: 10px; background-color: #9fdf9f; font-weight: bold">Uspešno ste kreirali oglas.</div>
+		<?php } ?>
+
 		<main id="main" class="site-main">
 			<div class="ast-row">
 
 				<?php $query = new WP_Query([
-					'author' => $author,
+					'author' => get_current_user_id(),
 					'post_type' => 'ad',
 				]); ?>
 

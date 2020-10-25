@@ -18,21 +18,24 @@ require_once(ABSPATH . "wp-admin" . '/includes/image.php');
 require_once(ABSPATH . "wp-admin" . '/includes/file.php');
 require_once(ABSPATH . "wp-admin" . '/includes/media.php');
 
-if (valid_create_ad_request()) {
-	$post_id = create_ad([
-		'title'       => $_POST['title'],
-		'description' => $_POST['description'],
-		'category'    => $_POST['category'],
-	]);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	if (valid_create_ad_request()) {
+		$post_id = create_ad([
+			'title'       => $_POST['title'],
+			'description' => $_POST['description'],
+			'category'    => $_POST['category'],
+		]);
 
-	add_image_to_ad('slika', $post_id);
+		add_image_to_ad('slika', $post_id);
 
-	add_metas_to_ad($post_id, [
-		'cena' => $_POST['price'],
-		'stanje' => $_POST['condition'],
-		'telefon' => $_POST['telefon'] ?? null,
-		'lokacija' => $_POST['lokacija'] ?? null,
-	]);
+		add_metas_to_ad($post_id, [
+			'cena' => $_POST['price'],
+			'stanje' => $_POST['condition'],
+			'telefon' => $_POST['telefon'] ?? null,
+			'lokacija' => $_POST['lokacija'] ?? null,
+		]);
+		wp_redirect(site_url('moji-oglasi?ad_created=1'));
+	}
 }
 
 $categories = get_terms([
