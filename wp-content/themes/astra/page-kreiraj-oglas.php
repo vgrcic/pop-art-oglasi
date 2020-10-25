@@ -2,7 +2,7 @@
 /**
  * The template for displaying archive pages.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * @link https/codex.wordpress.org/Template_Hierarchy
  *
  * @package Astra
  * @since 1.0.0
@@ -46,7 +46,7 @@ get_header(); ?>
 
 	<?php get_sidebar(); ?>
 
-<?php endif ?>
+<?php endif; ?>
 
 	<div id="primary" <?php astra_primary_class(); ?>>
 
@@ -64,56 +64,53 @@ get_header(); ?>
 
 				<form method="POST" enctype="multipart/form-data">
 
-					<div>
-						<label for="title">Naslov: </label>
-						<input type="text" name="title" id="title" value="<?= old('title') ?>" required>
-					</div>
-
-					<div>
-						<label for="description">Opis: </label>
-						<textarea name="description" id="description" required><?= old('description') ?></textarea>
-					</div>
-
-					<div>
-						<label for="price">Cena: </label>
-						<input type="number" name="price" id="price" value="<?= old('price') ?>" required>
-					</div>
-
-					<div>
-						<?php $old_condition = old('condition') ?>
-						<label for="condition">Stanje robe: </label>
-						<select name="condition" id="condition">
-							<option value="new" <?php if ($old_condition === 'new') { ?> selected <?php } ?> >Novo</option>
-							<option value="used" <?php if ($old_condition === 'used') { ?> selected <?php } ?> >Polovno</option>
-						</select>
-					</div>
-
-					<div>
-						<?php $old_category = old('category') ?>
-						<label for="category">Kategorija: </label>
-						<select name="category" id="category">
-							<?php foreach ($categories as $item) { ?>
-								<option value="<?= $item->term_id ?>" <?php if ($old_category == $item->term_id) { ?> selected <?php } ?> >
-									<?= $item->name ?>
-								</option>
-							<?php } ?>
-						</select>
-					</div>
-
-					<div>
-						<label for="slika">Slika: </label>
-						<input type="file" name="slika" id="slika" accept="image/*" required>
-					</div>
-
-					<div>
-						<label for="telefon">Kontakt telefon: </label>
-						<input type="text" name="telefon" id="telefon" value="<?= old('telefon') ?>">
-					</div>
-
-					<div>
-						<label for="lokacija">Lokacija: </label>
-						<input type="text" name="lokacija" id="lokacija" value="<?= old('lokacija') ?>">
-					</div>
+					<table>
+						<tr>
+							<th>Naslov *</th>
+							<td><input type="text" name="title" id="title" value="<?= old('title') ?>" required></td>
+						</tr>
+						<tr>
+							<th>Opis *</th>
+							<td><textarea name="description" id="description" required><?= old('description') ?></textarea></td>
+						</tr>
+						<tr>
+							<th>Cena *</th>
+							<td><input type="number" name="price" id="price" value="<?= old('price') ?>" required></td>
+						</tr>
+						<tr>
+							<th>Stanje robe *</th>
+							<td>
+								<select name="condition" id="condition">
+									<option value="new" <?php if ($old_condition === 'new') { ?> selected <?php } ?> >Novo</option>
+									<option value="used" <?php if ($old_condition === 'used') { ?> selected <?php } ?> >Polovno</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>Kategorija *</th>
+							<td>
+								<select name="category" id="category">
+									<?php foreach ($categories as $item) { ?>
+										<option value="<?= $item->term_id ?>" <?php if ($old_category == $item->term_id) { ?> selected <?php } ?> >
+											<?= $item->name ?>
+										</option>
+									<?php } ?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>Slika *</th>
+							<td><input type="file" name="slika" id="slika" accept="image/*" required></td>
+						</tr>
+						<tr>
+							<th>Kontakt telefon</th>
+							<td><input type="text" name="telefon" id="telefon" value="<?= old('telefon') ?>"></td>
+						</tr>
+						<tr>
+							<th>Lokacija</th>
+							<td><input type="text" name="lokacija" id="lokacija" value="<?= old('lokacija') ?>"></td>
+						</tr>
+					</table>
 
 					<button>Kreiraj</button>
 
@@ -132,7 +129,7 @@ get_header(); ?>
 
 	<?php get_sidebar(); ?>
 
-<?php endif ?>
+<?php endif; ?>
 
 <?php get_footer(); ?>
 
