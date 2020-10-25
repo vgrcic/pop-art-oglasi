@@ -39,7 +39,9 @@ get_header(); ?>
 				<a href="<?php the_permalink() ?>">
 					<div>
 						<h2><?php the_title() ?></h2>
-						<img width="200px" src="<?php the_field('slika') ?>">
+
+						<?= wp_get_attachment_image(get_field('slika')) ?>
+
 						<?php the_excerpt() ?>
 					</div>
 				</a>

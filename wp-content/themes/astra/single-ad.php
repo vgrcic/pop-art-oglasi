@@ -69,7 +69,7 @@ get_header(); ?>
 
 					<br>
 
-					<img src="<?php the_field('slika') ?>">
+					<img src="<?= wp_get_attachment_url(get_field('slika')) ?>">
 
 				</header>
 				<div class="entry-content clear" itemprop="text">
