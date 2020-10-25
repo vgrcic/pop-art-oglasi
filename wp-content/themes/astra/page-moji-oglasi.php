@@ -40,6 +40,7 @@ get_header(); ?>
 
 		<?php if ($_GET['delete_success']) { success('Uspešno ste obrisali oglas.'); } ?>
 		<?php if ($_GET['ad_created']) { success('Uspešno ste kreirali oglas.'); } ?>
+		<?php if ($_GET['ad_updated']) { success('Uspešno ste izmenili oglas.'); } ?>
 		<?php if ($_GET['register']) { success('Uspešno ste se registrovali.'); } ?>
 
 		<main id="main" class="site-main">

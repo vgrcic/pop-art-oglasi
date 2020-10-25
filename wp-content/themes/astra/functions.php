@@ -218,6 +218,14 @@ function get_first_term($post, $taxonomy) {
 	} return null;
 }
 
+function get_first_term_id($post, $taxonomy) {
+	$term = get_first_term($post, $taxonomy);
+
+	if (!empty($term)) {
+		return $term->term_id;
+	} return null;
+}
+
 function check_auth() {
 	if ( ! is_user_logged_in()) {
 		wp_redirect(site_url('/prijava'));
@@ -236,14 +244,24 @@ function old($field) {
 	} return null;
 }
 
+function old_or_field($field) {
+	if (is_post()) {
+		return old($field);
+	} return get_field($field);
+}
+
 function valid_create_ad_request() {
-	return $_SERVER['REQUEST_METHOD'] === 'POST'
+	return is_post()
 		&& !empty(trim($_POST['title']))
 		&& !empty(trim($_POST['description']))
 		&& !empty($_POST['category'])
-		&& !empty($_POST['price']) && is_numeric($_POST['price']) && $_POST['price'] > 0
+		&& !empty($_POST['cena']) && is_numeric($_POST['cena']) && $_POST['cena'] > 0
 		&& !empty($_POST['condition']) && in_array($_POST['condition'], ['new', 'used'])
-		&& (empty($_FILES['slika']) || is_valid_image($_FILES['slika']));
+		&& (empty($_FILES['slika']['tmp_name']) || is_valid_image($_FILES['slika']));
+}
+
+function is_post() {
+	return $_SERVER['REQUEST_METHOD'] === 'POST';
 }
 
 function is_valid_image($file) {
@@ -253,6 +271,17 @@ function is_valid_image($file) {
 
 function create_ad($data) {
 	return wp_insert_post([
+		'post_type'    => 'ad',
+		'post_status'  => 'publish',
+		'post_title'   => $data['title'],
+		'post_content' => $data['description'],
+		'tax_input'    => ['ad_category' => [$data['category']]],
+	]);
+}
+
+function update_ad($id, $data) {
+	return wp_insert_post([
+		'ID'           => $id,
 		'post_type'    => 'ad',
 		'post_status'  => 'publish',
 		'post_title'   => $data['title'],
@@ -304,7 +333,7 @@ function error($message) {
 }
 
 function valid_registration_request() {
-	return $_SERVER['REQUEST_METHOD'] === 'POST'
+	return is_post()
 		&& !empty(trim($_POST['first_name']))
 		&& !empty(trim($_POST['last_name']))
 		&& !empty(trim($_POST['username']))
