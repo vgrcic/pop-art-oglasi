@@ -295,6 +295,24 @@ function pretty_date_diff($date) {
 	} return 'pre '.$days.' dan(a)';
 }
 
+function success($message) {
+	echo '<div style="padding: 10px; background-color: #9fdf9f; font-weight: bold">'.$message.'</div>';
+}
+
+function error($message) {
+	echo '<div style="padding: 10px; background-color: #ff8080; font-weight: bold">'.$message.'</div>';
+}
+
+function valid_registration_request() {
+	return $_SERVER['REQUEST_METHOD'] === 'POST'
+		&& !empty(trim($_POST['first_name']))
+		&& !empty(trim($_POST['last_name']))
+		&& !empty(trim($_POST['username']))
+		&& !empty(trim($_POST['email'])) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
+		&& !empty($_POST['password']) && strlen($_POST['password']) >= 6
+		&& !empty($_POST['password_confirmation']) && $_POST['password'] == $_POST['password_confirmation'];
+}
+
 add_action('init', 'register_ad_post_type');
 add_action('init', 'register_ad_category_taxonomy');
 add_action('init', 'blockusers_init');

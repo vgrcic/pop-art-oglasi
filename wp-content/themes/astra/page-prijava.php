@@ -25,9 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		'user_password' => $_POST['password'],
 	]);
 
-	wp_redirect(site_url('/'));
+	if ($result instanceof WP_Error) {
+		wp_redirect(site_url('prijava?error=1'));
+	} else wp_redirect(site_url('moji-oglasi'));
 }
-
 
 get_header(); ?>
 
@@ -43,15 +44,20 @@ get_header(); ?>
 
 		<?php astra_content_page_loop(); ?>
 
+		<?php if (!empty($_REQUEST['error'])) { error('Niste uneli ispravne podatke. Pokušajte ponovo.'); } ?>
+
 		<form method="POST">
-			<div>
-				<label>Korisničko ime</label>
-				<input type="text" name="username" required>
-			</div>
-			<div>
-				<label>Lozinka</label>
-				<input type="password" name="password" required>
-			</div>
+
+			<table>
+				<tr>
+					<th>Korisničko ime</th>
+					<td><input type="text" name="username" required></td>
+				</tr>
+				<tr>
+					<th>Lozinka</th>
+					<td><input type="password" name="password" required></td>
+				</tr>
+			</table>
 			<div>
 				<button>Prijava</button>
 			</div>

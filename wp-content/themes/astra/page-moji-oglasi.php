@@ -38,13 +38,9 @@ get_header(); ?>
 			</div>
 		</section>
 
-		<?php if ($_GET['delete_success']) { ?>
-			<div style="padding: 10px; background-color: #9fdf9f; font-weight: bold">Uspešno ste obrisali oglas.</div>
-		<?php } ?>
-
-		<?php if ($_GET['ad_created']) { ?>
-			<div style="padding: 10px; background-color: #9fdf9f; font-weight: bold">Uspešno ste kreirali oglas.</div>
-		<?php } ?>
+		<?php if ($_GET['delete_success']) { success('Uspešno ste obrisali oglas.'); } ?>
+		<?php if ($_GET['ad_created']) { success('Uspešno ste kreirali oglas.'); } ?>
+		<?php if ($_GET['register']) { success('Uspešno ste se registrovali.'); } ?>
 
 		<main id="main" class="site-main">
 			<div class="ast-row">
