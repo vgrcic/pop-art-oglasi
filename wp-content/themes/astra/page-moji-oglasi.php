@@ -66,7 +66,7 @@ get_header(); ?>
 							<tr>
 								<td><?php the_title() ?></td>
 								<td><a href="<?php the_permalink() ?>" target="_blank">pregled</a></td>
-								<td><a href="<?= site_url('/izmena-oglasi?edit='.get_the_ID()) ?>">izmena</a></td>
+								<td><a href="<?= site_url('/izmena-oglasa?edit='.get_the_ID()) ?>">izmena</a></td>
 								<td><button onclick="delete_ad(<?= get_the_ID() ?>)">brisanje</button></td>
 							</tr>
 						<?php endwhile; ?>
